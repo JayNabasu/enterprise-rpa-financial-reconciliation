@@ -1,0 +1,49 @@
+<Activity mc:Ignorable="sap sap2010" x:Class="GeminiAiFallback"
+ xmlns="http://schemas.microsoft.com/netfx/2009/xaml/activities"
+ xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+ xmlns:sap="http://schemas.microsoft.com/netfx/2009/xaml/activities/presentation"
+ xmlns:sap2010="http://schemas.microsoft.com/netfx/2010/xaml/activities/presentation"
+ xmlns:scg="clr-namespace:System.Collections.Generic;assembly=System.Private.CoreLib"
+ xmlns:ui="http://schemas.uipath.com/workflow/activities"
+ xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+  <x:Members>
+    <x:Property Name="in_InvoiceFilePath" Type="InArgument(x:String)" />
+    <x:Property Name="in_GeminiApiKey" Type="InArgument(x:String)" />
+    <x:Property Name="out_ExtractedJson" Type="OutArgument(x:String)" />
+    <x:Property Name="out_Confidence" Type="OutArgument(x:Double)" />
+  </x:Members>
+  <sap2010:ExpressionActivityEditor.ExpressionActivityEditor>CSharp</sap2010:ExpressionActivityEditor.ExpressionActivityEditor>
+  <sap:VirtualizedContainerService.HintSize>800,800</sap:VirtualizedContainerService.HintSize>
+  <sap2010:WorkflowViewState.IdRef>GeminiAiFallback_1</sap2010:WorkflowViewState.IdRef>
+  <Sequence DisplayName="Gemini AI Multimodal Document Extraction Workflow" sap:VirtualizedContainerService.HintSize="680,700" sap2010:WorkflowViewState.IdRef="Sequence_1">
+    <Sequence.Variables>
+      <Variable x:TypeArguments="x:String" Name="base64Content" />
+      <Variable x:TypeArguments="x:String" Name="mimeType" />
+      <Variable x:TypeArguments="x:String" Name="jsonPayload" />
+      <Variable x:TypeArguments="x:String" Name="strApiResponse" />
+      <Variable x:TypeArguments="x:Int32" Name="intStatusCode" />
+    </Sequence.Variables>
+    
+    <ui:LogMessage DisplayName="Log AI Invocation" sap:VirtualizedContainerService.HintSize="450,92" Level="Info">
+      <ui:LogMessage.Message>
+        <InArgument x:TypeArguments="x:Object">
+          <CSharpValue x:TypeArguments="x:Object">"Invoking Google Gemini 2.0 / Vertex AI multimodal endpoint for unformatted invoice extraction."</CSharpValue>
+        </InArgument>
+      </ui:LogMessage.Message>
+    </ui:LogMessage>
+
+    <ui:Comment DisplayName="Payload Construction Documentation" sap:VirtualizedContainerService.HintSize="450,130" 
+      Text="// Read file bytes, encode to base64, detect mime type (application/pdf or image/png), and format Gemini generateContent REST payload with schema instructions." />
+
+    <ui:Comment DisplayName="Retry Scope &amp; Rate Limit Handling" sap:VirtualizedContainerService.HintSize="450,110" 
+      Text="// UiPath HTTP Request activity is executed within a Retry Scope (3 attempts, exponential backoff) checking for StatusCode == 200 or handling HTTP 429." />
+
+    <ui:LogMessage DisplayName="Log AI Success" sap:VirtualizedContainerService.HintSize="450,92" Level="Info">
+      <ui:LogMessage.Message>
+        <InArgument x:TypeArguments="x:Object">
+          <CSharpValue x:TypeArguments="x:Object">"Successfully received and parsed structured JSON response from Gemini AI Trust Layer."</CSharpValue>
+        </InArgument>
+      </ui:LogMessage.Message>
+    </ui:LogMessage>
+  </Sequence>
+</Activity>

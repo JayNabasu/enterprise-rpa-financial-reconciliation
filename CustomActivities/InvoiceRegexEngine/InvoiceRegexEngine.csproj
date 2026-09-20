@@ -1,0 +1,15 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net8.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+    <AssemblyName>InvoiceRegexEngine</AssemblyName>
+    <RootNamespace>EnterpriseRPA.RegexEngine</RootNamespace>
+    <Version>1.0.0</Version>
+    <Authors>Jerry Nabasu</Authors>
+    <Company>NNPC Limited / JayNabasu</Company>
+    <Description>High-performance compiled Regular Expressions engine for financial document processing, VAT/WHT withholding validation, and SAP S/4HANA PO reconciliation.</Description>
+  </PropertyGroup>
+
+</Project>

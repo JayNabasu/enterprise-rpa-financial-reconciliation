@@ -1,0 +1,35 @@
+# UiPath Studio Files
+.local/
+.screenshots/
+.tmh/
+.objects/
+.templates/
+*.backup
+*.bak
+_backup/
+UpgradeLog.XML
+UpgradeLog.htm
+
+# .NET / C# build outputs
+bin/
+obj/
+*.user
+*.suo
+*.userosscache
+*.sln.docstates
+
+# Python / Mock Server
+__pycache__/
+*.py[cod]
+*$py.class
+.venv/
+venv/
+env/
+.pytest_cache/
+*.log
+
+# Operating System & IDE
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/
